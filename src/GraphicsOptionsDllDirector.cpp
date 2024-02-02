@@ -370,7 +370,8 @@ private:
 			{
 				logger.WriteLineFormatted(
 					LogLevel::Error,
-					"Unable to force the DirectX color depth to 32-bit, unsupported game version %d.",
+					"Unable to force the DirectX full screen color depth to 32-bit. Requires "
+					"game version 641, found game version %d.",
 					gameVersion);
 			}
 		}
