@@ -81,6 +81,7 @@ See [LICENSE.txt](LICENSE.txt) for more information.
 [scgl](https://github.com/nsgomez/scgl) Located in the vendor folder, GNU Lesser General Public License version 2.1.    
 [EABase](https://github.com/electronicarts/EABase) Located in the vendor folder, BSD 3-Clause License.    
 [EASTL](https://github.com/electronicarts/EASTL) Located in the vendor folder, BSD 3-Clause License.    
+[SC4Fix](https://github.com/nsgomez/sc4fix) - MIT License.     
 [Windows Implementation Library](https://github.com/microsoft/wil) - MIT License    
 [Boost.PropertyTree](https://www.boost.org/doc/libs/1_83_0/doc/html/property_tree.html) - Boost Software License, Version 1.0.
 
