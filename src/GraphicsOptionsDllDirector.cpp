@@ -356,13 +356,13 @@ private:
 				{
 					// Replace the hard-coded value of 16 with 32.
 					OverwriteMemory(0x887738, 32);
-					logger.WriteLine(LogLevel::Info, "Forced the DirectX color depth to 32-bit.");
+					logger.WriteLine(LogLevel::Info, "Forced the DirectX full screen color depth to 32-bit.");
 				}
 				catch (const std::exception& e)
 				{
 					logger.WriteLineFormatted(
 						LogLevel::Error,
-						"Failed to force the DirectX color depth to 32-bit: %s",
+						"Failed to force the DirectX full screen color depth to 32-bit: %s",
 						e.what());
 				}
 			}
