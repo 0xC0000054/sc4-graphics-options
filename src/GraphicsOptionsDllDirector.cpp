@@ -182,8 +182,6 @@ public:
 
 			if (pApp->QueryInterface(GZIID_cISC4App, pSC4App.AsPPVoid()))
 			{
-				std::filesystem::path sc4AppFolder = GetSC4AppFolderPath();
-
 				SC4Preferences* prefs = pSC4App->GetPreferences();
 				SC4VideoPreferences& videoPrefs = prefs->videoPreferences;
 
