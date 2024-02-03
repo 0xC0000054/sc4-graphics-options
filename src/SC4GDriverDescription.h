@@ -20,45 +20,31 @@
  */
 
 #pragma once
-#include "SC4GDriverDescription.h"
-#include <filesystem>
+#include <string>
 
-enum class SC4WindowMode
-{
-	Windowed = 0,
-	FullScreen,
-	BorderlessFullScreen
-};
-
-class Settings
+// Provides information about a SC4 graphics driver.
+class SC4GDriverDescription
 {
 public:
 
-	Settings();
+	static SC4GDriverDescription& DirectX();
 
-	void Load(const std::filesystem::path& path);
+	static SC4GDriverDescription& OpenGL();
 
-	bool EnableIntroVideo() const;
+	static SC4GDriverDescription& Software();
 
-	const SC4GDriverDescription& GetGDriverDescription() const;
+	uint32_t GetGZCLSID() const;
 
-	uint32_t GetWindowWidth() const;
+	const std::string& GetName() const;
 
-	uint32_t GetWindowHeight() const;
-
-	uint32_t GetColorDepth() const;
-
-	SC4WindowMode GetWindowMode() const;
-
-	bool IsUsingGDriver(uint32_t clsid) const;
+	bool IsHardwareDriver() const;
 
 private:
 
-	bool enableIntroVideo;
-	SC4GDriverDescription driverDescription;
-	uint32_t windowWidth;
-	uint32_t windowHeight;
-	uint32_t colorDepth;
-	SC4WindowMode windowMode;
+	SC4GDriverDescription(uint32_t clsid, const std::string& name, bool hardwareDriver);
+
+	uint32_t clsid;
+	std::string name;
+	bool isHardwareDriver;
 };
 

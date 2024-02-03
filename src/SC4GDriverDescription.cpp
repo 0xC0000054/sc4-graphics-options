@@ -19,46 +19,51 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#pragma once
 #include "SC4GDriverDescription.h"
-#include <filesystem>
+#include "SC4GDriverCLSIDDefs.h"
 
-enum class SC4WindowMode
+SC4GDriverDescription& SC4GDriverDescription::DirectX()
 {
-	Windowed = 0,
-	FullScreen,
-	BorderlessFullScreen
-};
+	static SC4GDriverDescription instance(kSCGDriverDirectX, "DirectX", true);
 
-class Settings
+	return instance;
+}
+
+SC4GDriverDescription& SC4GDriverDescription::OpenGL()
 {
-public:
+	static SC4GDriverDescription instance(kSCGDriverOpenGL, "OpenGL", true);
 
-	Settings();
+	return instance;
+}
 
-	void Load(const std::filesystem::path& path);
+SC4GDriverDescription& SC4GDriverDescription::Software()
+{
+	static SC4GDriverDescription instance(kSCGDriverSoftware, "Software", false);
 
-	bool EnableIntroVideo() const;
+	return instance;
+}
 
-	const SC4GDriverDescription& GetGDriverDescription() const;
+SC4GDriverDescription::SC4GDriverDescription(
+	uint32_t clsid,
+	const std::string& name,
+	bool hardwareDriver)
+	: clsid(clsid),
+	  name(name),
+	  isHardwareDriver(hardwareDriver)
+{
+}
 
-	uint32_t GetWindowWidth() const;
+uint32_t SC4GDriverDescription::GetGZCLSID() const
+{
+	return clsid;
+}
 
-	uint32_t GetWindowHeight() const;
+const std::string& SC4GDriverDescription::GetName() const
+{
+	return name;
+}
 
-	uint32_t GetColorDepth() const;
-
-	SC4WindowMode GetWindowMode() const;
-
-	bool IsUsingGDriver(uint32_t clsid) const;
-
-private:
-
-	bool enableIntroVideo;
-	SC4GDriverDescription driverDescription;
-	uint32_t windowWidth;
-	uint32_t windowHeight;
-	uint32_t colorDepth;
-	SC4WindowMode windowMode;
-};
-
+bool SC4GDriverDescription::IsHardwareDriver() const
+{
+	return isHardwareDriver;
+}

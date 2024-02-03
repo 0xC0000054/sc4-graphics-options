@@ -32,6 +32,7 @@
     <ClCompile Include="..\vendor\gzcom-dll\src\StringResourceManager.cpp" />
     <ClCompile Include="GraphicsOptionsDllDirector.cpp" />
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="SC4GDriverDescription.cpp" />
     <ClCompile Include="SC4VersionDetection.cpp" />
     <ClCompile Include="Settings.cpp" />
   </ItemGroup>
@@ -51,6 +52,8 @@
     <ClInclude Include="..\vendor\scgl\cIGZGDriver.h" />
     <ClInclude Include="..\vendor\scgl\sGDMode.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="SC4GDriverCLSIDDefs.h" />
+    <ClInclude Include="SC4GDriverDescription.h" />
     <ClInclude Include="SC4VersionDetection.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="version.h" />

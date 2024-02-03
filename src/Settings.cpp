@@ -41,7 +41,7 @@ namespace
 			&& boost::istarts_with(lhs, rhs);
 	}
 
-	SC4GraphicsDriverType DriverTypeFromProperty(
+	SC4GDriverDescription DriverDescriptionFromProperty(
 		const boost::property_tree::ptree& tree,
 		const char* const propertyPath)
 	{
@@ -49,15 +49,15 @@ namespace
 
 		if (EqualsIgnoreCase(value, "DirectX"))
 		{
-			return SC4GraphicsDriverType::DirectX;
+			return SC4GDriverDescription::DirectX();
 		}
 		else if (EqualsIgnoreCase(value, "OpenGL") || EqualsIgnoreCase(value, "SCGL"))
 		{
-			return SC4GraphicsDriverType::OpenGL;
+			return SC4GDriverDescription::OpenGL();
 		}
 		else if (StartsWithIgnoreCase(value, "Soft")) // SC4 only checks the first 4 letters of Software.
 		{
-			return SC4GraphicsDriverType::Software;
+			return SC4GDriverDescription::Software();
 		}
 		else
 		{
@@ -68,7 +68,7 @@ namespace
 				"Unknown Driver value '%s', falling back to DirectX.",
 				value.c_str());
 
-			return SC4GraphicsDriverType::DirectX;
+			return SC4GDriverDescription::DirectX();
 		}
 	}
 
@@ -106,7 +106,7 @@ namespace
 
 Settings::Settings()
 	: enableIntroVideo(true),
-	  driverType(SC4GraphicsDriverType::DirectX),
+	  driverDescription(SC4GDriverDescription::DirectX()),
 	  windowWidth(1024),
 	  windowHeight(768),
 	  colorDepth(32),
@@ -130,7 +130,7 @@ void Settings::Load(const std::filesystem::path& path)
 	boost::property_tree::ini_parser::read_ini(stream, tree);
 
 	enableIntroVideo = tree.get<bool>("GraphicsOptions.EnableIntroVideo");
-	driverType = DriverTypeFromProperty(tree, "GraphicsOptions.Driver");
+	driverDescription = DriverDescriptionFromProperty(tree, "GraphicsOptions.Driver");
 	windowMode = WindowModeFromProperty(tree, "GraphicsOptions.WindowMode");
 	colorDepth = tree.get<uint32_t>("GraphicsOptions.ColorDepth");
 
@@ -190,9 +190,9 @@ bool Settings::EnableIntroVideo() const
 	return enableIntroVideo;
 }
 
-SC4GraphicsDriverType Settings::GetDriverType() const
+const SC4GDriverDescription& Settings::GetGDriverDescription() const
 {
-	return driverType;
+	return driverDescription;
 }
 
 uint32_t Settings::GetWindowWidth() const
@@ -213,4 +213,9 @@ uint32_t Settings::GetColorDepth() const
 SC4WindowMode Settings::GetWindowMode() const
 {
 	return windowMode;
+}
+
+bool Settings::IsUsingGDriver(uint32_t clsid) const
+{
+	return driverDescription.GetGZCLSID() == clsid;
 }

@@ -21,6 +21,7 @@
 
 #include "version.h"
 #include "Logger.h"
+#include "SC4GDriverCLSIDDefs.h"
 #include "SC4VersionDetection.h"
 #include "Settings.h"
 #include "cGZDisplayMetrics.h"
@@ -62,10 +63,6 @@
 
 static constexpr uint32_t kGZGraphicSystem_SystemServiceID = 0xC416025C;
 
-static constexpr uint32_t kSCGDriverDirectX = 0xBADB6906;
-static constexpr uint32_t kSCGDriverOpenGL = 0xC4554841;
-static constexpr uint32_t kSCGDriverSoftware = 0x7ACA35C6;
-
 static constexpr uint32_t kGraphicsOptionsDirectorID = 0x50A4C948;
 
 static constexpr uint32_t GZIID_cISC4App = 0x26CE01C0;
@@ -94,18 +91,11 @@ namespace
 		return GetModuleFolderPath(nullptr);
 	}
 
-	bool DriverTypesMatch(uint8_t existingDriverType, SC4GraphicsDriverType newDriverType)
+	bool DriverTypesMatch(uint8_t existingDriverType, const SC4GDriverDescription& newDriverType)
 	{
-		switch (newDriverType)
-		{
-		case SC4GraphicsDriverType::DirectX:
-		case SC4GraphicsDriverType::OpenGL:
-			return existingDriverType != 0;
-		case SC4GraphicsDriverType::Software:
-			return existingDriverType == 0;
-		default:
-			return false;
-		}
+		bool existingDriverIsHardware = existingDriverType != 0;
+
+		return existingDriverIsHardware == newDriverType.IsHardwareDriver();
 	}
 
 	bool WindowModesMatch(bool isFullScreen, SC4WindowMode windowMode)
@@ -189,13 +179,13 @@ public:
 				uint32_t windowHeight = settings.GetWindowHeight();
 				uint32_t colorDepth = settings.GetColorDepth();
 				SC4WindowMode windowMode = settings.GetWindowMode();
-				SC4GraphicsDriverType driverType = settings.GetDriverType();
+				const SC4GDriverDescription& driver = settings.GetGDriverDescription();
 
 				if (videoPrefs.width != windowWidth
 					|| videoPrefs.height != windowHeight
 					|| videoPrefs.bitDepth != colorDepth
 					|| !WindowModesMatch(videoPrefs.bFullScreen != 0, windowMode)
-					|| !DriverTypesMatch(videoPrefs.driverType, driverType))
+					|| !DriverTypesMatch(videoPrefs.driverType, driver))
 				{
 					videoPrefs.width = windowWidth;
 					videoPrefs.height = windowHeight;
@@ -205,16 +195,7 @@ public:
 					// The game preferences UI treats the driver type as a Boolean, where a value
 					// of 1 indicates hardware rendering and a value of 0 indicates software rendering.
 					// Unlike the base game, we consider OpenGL to be hardware rendering.
-					switch (driverType)
-					{
-					case SC4GraphicsDriverType::DirectX:
-					case SC4GraphicsDriverType::OpenGL:
-						videoPrefs.driverType = 1;
-						break;
-					case SC4GraphicsDriverType::Software:
-						videoPrefs.driverType = 0;
-						break;
-					}
+					videoPrefs.driverType = driver.IsHardwareDriver() ? 1 : 0;
 
 					pSC4App->SavePreferences();
 				}
@@ -305,7 +286,7 @@ private:
 
 	void CheckDirectX7ResolutionLimit(uint32_t width, uint32_t height)
 	{
-		if (settings.GetDriverType() == SC4GraphicsDriverType::DirectX)
+		if (settings.IsUsingGDriver(kSCGDriverDirectX))
 		{
 			// SC4 was built with DirectX 7, which has a resolution limit of 2048x2048 or less.
 			// This limit can be exceeded with the use of DirectX wrappers that translate the
@@ -341,7 +322,7 @@ private:
 		// game's memory to fix that.
 		// This fix is based on the patched SimCity 4 executable at https://github.com/dege-diosg/dgVoodoo2/issues/3
 
-		if (settings.GetDriverType() == SC4GraphicsDriverType::DirectX
+		if (settings.IsUsingGDriver(kSCGDriverDirectX)
 			&& settings.GetWindowMode() == SC4WindowMode::FullScreen
 			&& settings.GetColorDepth() == 32)
 		{
@@ -398,25 +379,11 @@ private:
 
 		if (pGS2)
 		{
-			uint32_t requestedDriverID = 0;
-
-			switch (settings.GetDriverType())
-			{
-			case SC4GraphicsDriverType::OpenGL:
-				requestedDriverID = kSCGDriverOpenGL;
-				break;
-			case SC4GraphicsDriverType::Software:
-				requestedDriverID = kSCGDriverSoftware;
-				break;
-			case SC4GraphicsDriverType::DirectX:
-			default:
-				requestedDriverID = kSCGDriverDirectX;
-				break;
-			}
+			const SC4GDriverDescription& requestedDriver = settings.GetGDriverDescription();
 
 			// SC4 will use driver with the requested ID
 			// when it initializes the graphics system.
-			pGS2->SetDefaultDriverClassID(requestedDriverID);
+			pGS2->SetDefaultDriverClassID(requestedDriver.GetGZCLSID());
 		}
 	}
 
@@ -464,34 +431,17 @@ private:
 
 			if (pDriver)
 			{
-				uint32_t requestedDriverID = 0;
-				const char* driverName = nullptr;
+				const SC4GDriverDescription& requestedDriver = settings.GetGDriverDescription();
 
-				switch (settings.GetDriverType())
-				{
-				case SC4GraphicsDriverType::OpenGL:
-					requestedDriverID = kSCGDriverOpenGL;
-					driverName = "OpenGL";
-					break;
-				case SC4GraphicsDriverType::Software:
-					requestedDriverID = kSCGDriverSoftware;
-					driverName = "Software";
-					break;
-				case SC4GraphicsDriverType::DirectX:
-				default:
-					requestedDriverID = kSCGDriverDirectX;
-					driverName = "DirectX";
-					break;
-				}
-
-				uint32_t currentDriverID = pDriver->GetGZCLSID();
+				const uint32_t currentDriverID = pDriver->GetGZCLSID();
+				const uint32_t requestedDriverID = requestedDriver.GetGZCLSID();
 
 				if (currentDriverID != requestedDriverID)
 				{
 					logger.WriteLineFormatted(
 						LogLevel::Error,
 						"Failed to set the game's driver to %s.",
-						driverName);
+						requestedDriver.GetName().c_str());
 				}
 			}
 		}

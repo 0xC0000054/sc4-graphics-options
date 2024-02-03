@@ -20,45 +20,8 @@
  */
 
 #pragma once
-#include "SC4GDriverDescription.h"
-#include <filesystem>
+#include <cstdint>
 
-enum class SC4WindowMode
-{
-	Windowed = 0,
-	FullScreen,
-	BorderlessFullScreen
-};
-
-class Settings
-{
-public:
-
-	Settings();
-
-	void Load(const std::filesystem::path& path);
-
-	bool EnableIntroVideo() const;
-
-	const SC4GDriverDescription& GetGDriverDescription() const;
-
-	uint32_t GetWindowWidth() const;
-
-	uint32_t GetWindowHeight() const;
-
-	uint32_t GetColorDepth() const;
-
-	SC4WindowMode GetWindowMode() const;
-
-	bool IsUsingGDriver(uint32_t clsid) const;
-
-private:
-
-	bool enableIntroVideo;
-	SC4GDriverDescription driverDescription;
-	uint32_t windowWidth;
-	uint32_t windowHeight;
-	uint32_t colorDepth;
-	SC4WindowMode windowMode;
-};
-
+static constexpr uint32_t kSCGDriverDirectX = 0xBADB6906;
+static constexpr uint32_t kSCGDriverOpenGL = 0xC4554841;
+static constexpr uint32_t kSCGDriverSoftware = 0x7ACA35C6;
