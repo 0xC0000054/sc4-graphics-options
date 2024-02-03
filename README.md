@@ -6,7 +6,7 @@ A DLL Plugin for SimCity 4 that sets the game's rendering mode and resolution op
 
 * Custom resolutions can be configured without command line arguments.
 * Allows the game's intro to be disabled without a command line argument.
-* Native support for borderless full screen mode.
+* Supports borderless full screen mode without requiring a launcher.
 * Supports changing the game's rendering driver without a command line argument, see the Driver section of the setting overview.
 * Allows full screen mode to use 32-bit color.
 
