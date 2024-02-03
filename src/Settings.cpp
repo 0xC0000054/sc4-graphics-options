@@ -106,6 +106,7 @@ namespace
 
 Settings::Settings()
 	: enableIntroVideo(true),
+	  pauseGameOnFocusLoss(false),
 	  driverDescription(SC4GDriverDescription::DirectX()),
 	  windowWidth(1024),
 	  windowHeight(768),
@@ -130,6 +131,7 @@ void Settings::Load(const std::filesystem::path& path)
 	boost::property_tree::ini_parser::read_ini(stream, tree);
 
 	enableIntroVideo = tree.get<bool>("GraphicsOptions.EnableIntroVideo");
+	pauseGameOnFocusLoss = tree.get<bool>("GraphicsOptions.PauseGameOnFocusLoss");
 	driverDescription = DriverDescriptionFromProperty(tree, "GraphicsOptions.Driver");
 	windowMode = WindowModeFromProperty(tree, "GraphicsOptions.WindowMode");
 	colorDepth = tree.get<uint32_t>("GraphicsOptions.ColorDepth");
@@ -218,4 +220,9 @@ SC4WindowMode Settings::GetWindowMode() const
 bool Settings::IsUsingGDriver(uint32_t clsid) const
 {
 	return driverDescription.GetGZCLSID() == clsid;
+}
+
+bool Settings::PauseGameOnFocusLoss() const
+{
+	return pauseGameOnFocusLoss;
 }

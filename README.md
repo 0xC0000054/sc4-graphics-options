@@ -5,10 +5,11 @@ A DLL Plugin for SimCity 4 that sets the game's rendering mode and resolution op
 ## Features
 
 * Custom resolutions can be configured without command line arguments.
-* Allows the game's intro to be disabled without a command line argument.
 * Supports borderless full screen mode without requiring a launcher.
 * Supports changing the game's rendering driver without a command line argument, see the Driver section of the setting overview.
 * Allows full screen mode to use 32-bit color.
+* Allows the game's intro to be disabled without a command line argument.
+* Allows pausing on focus loss to be enabled without a command line argument.
 
 The plugin can be downloaded from the Releases tab: https://github.com/0xC0000054/sc4-graphics-options/releases
 
@@ -38,6 +39,9 @@ with administrator permissions to be able to save the file.
 
 `EnableIntroVideo` controls whether the game's intro video will be played on startup, defaults to true.
 Setting this to false is equivalent to the -Intro:off command line argument. 
+
+`PauseGameOnFocusLoss` controls whether the game will be paused when it looses focus, defaults to false.
+Setting this to true is equivalent to the -gp command line argument.
 
  `Driver` the driver that SC4 uses for rendering, the supported values are listed in the following table:
 

@@ -200,6 +200,8 @@ public:
 					pSC4App->SavePreferences();
 				}
 
+				pSC4App->EnableFullGamePauseOnAppFocusLoss(settings.PauseGameOnFocusLoss());
+
 				CheckDirectX7ResolutionLimit(videoPrefs.width, videoPrefs.height);
 				FixFullScreen32BitColorDepth();
 				SetGraphicsOptions();

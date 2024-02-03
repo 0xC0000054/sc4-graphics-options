@@ -52,9 +52,12 @@ public:
 
 	bool IsUsingGDriver(uint32_t clsid) const;
 
+	bool PauseGameOnFocusLoss() const;
+
 private:
 
 	bool enableIntroVideo;
+	bool pauseGameOnFocusLoss;
 	SC4GDriverDescription driverDescription;
 	uint32_t windowWidth;
 	uint32_t windowHeight;
