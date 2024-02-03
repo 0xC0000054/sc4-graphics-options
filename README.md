@@ -50,7 +50,7 @@ Setting this to true is equivalent to the -gp command line argument.
  | DirectX | SC4's default hardware renderer. Because this renderer targets DirectX 7, a DirectX wrapper (e.g. [dgVoodo 2](https://github.com/dege-diosg/dgVoodoo2) or [DxWrapper](https://github.com/elishacloud/dxwrapper)) is required for resolutions above 2048x2048. |
  | OpenGL | An unfinished hardware renderer. simmaster07's [SCGL](https://github.com/nsgomez/scgl) project aims to replace this renderer with a new one targeting OpenGL 3.0. |
  | SCGL | simmaster07's replacement for SC4's OpenGL renderer. This is an alias for the OpenGL entry above. |
- | Software | The renderer SC4 uses when no supported hardware rendering support is available. |
+ | Software | The renderer SC4 uses when no supported hardware renderer is available. |
 
  `WindowWidth` the width of SC4's window when running in windowed mode. This is ignored for the full screen and borderless full screen modes.
 The minimum value is 800, values above 2048 with the DirectX driver require the use of a DirectX wrapper.
@@ -67,7 +67,7 @@ The minimum value is 600, values above 2048 with the DirectX driver require the 
 | Windowed | Runs the game in windowed mode, the window size is set by the `WindowWidth` and `WindowHeight` values above. Equivalent to the -w command line parameter.|
 | FullScreen | Runs the game in full screen mode. Equivalent to the -f command line parameter. Screen resolutions larger that 2048x2048 in DirectX mode require the use of a DirectX wrapper. |
 | BorderlessFullScreen | Runs the game a window that covers the entire screen. Screen resolutions larger that 2048x2048 in DirectX mode require the use of a DirectX wrapper. |
-| Borderless | An alias for The `BorderlessFullScreen` option above. |
+| Borderless | An alias for the `BorderlessFullScreen` option above. |
 
 ## Troubleshooting
 
