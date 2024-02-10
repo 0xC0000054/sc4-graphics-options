@@ -120,7 +120,8 @@ static HWND WINAPI HookedCreateWindowExA(
 
 			// A borderless full screen window uses the WS_POPUP style instead of WS_OVERLAPPED.
 			// The WS_MAXIMIZE style is also required to make the OS hide the task bar when the
-			// window is displayed.
+			// window is displayed, this may be due to the fact that SC4 only calls ShowWindow
+			// if some condition is met, and that condition is not met when starting the game.
 			dwStyle = WS_VISIBLE | WS_POPUP | WS_MAXIMIZE;
 			X = 0;
 			Y = 0;
@@ -128,8 +129,8 @@ static HWND WINAPI HookedCreateWindowExA(
 			nHeight = GetSystemMetrics(SM_CYSCREEN);
 		}
 
-		// Save the window handle, this is used by the SetWindowPos hook
-		// to ensure that it is only modifying the game's main window.
+		// Save the window handle, this is used by the other hook functions
+		// to ensure that they are only modifying the game's main window.
 		s_SC4MainWindowHWND = RealCreateWindowExA(
 			dwExStyle,
 			lpClassName,
