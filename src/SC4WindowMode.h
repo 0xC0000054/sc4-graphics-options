@@ -20,42 +20,10 @@
  */
 
 #pragma once
-#include "SC4GDriverDescription.h"
-#include "SC4WindowMode.h"
-#include <filesystem>
 
-class Settings
+enum class SC4WindowMode
 {
-public:
-
-	Settings();
-
-	void Load(const std::filesystem::path& path);
-
-	bool EnableIntroVideo() const;
-
-	const SC4GDriverDescription& GetGDriverDescription() const;
-
-	uint32_t GetWindowWidth() const;
-
-	uint32_t GetWindowHeight() const;
-
-	uint32_t GetColorDepth() const;
-
-	SC4WindowMode GetWindowMode() const;
-
-	bool IsUsingGDriver(uint32_t clsid) const;
-
-	bool PauseGameOnFocusLoss() const;
-
-private:
-
-	bool enableIntroVideo;
-	bool pauseGameOnFocusLoss;
-	SC4GDriverDescription driverDescription;
-	uint32_t windowWidth;
-	uint32_t windowHeight;
-	uint32_t colorDepth;
-	SC4WindowMode windowMode;
+	Windowed = 0,
+	FullScreen,
+	BorderlessFullScreen
 };
-

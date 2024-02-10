@@ -23,6 +23,7 @@
 #include "Logger.h"
 #include "SC4GDriverCLSIDDefs.h"
 #include "SC4VersionDetection.h"
+#include "SC4WindowCreationHooks.h"
 #include "Settings.h"
 #include "cGZDisplayMetrics.h"
 #include "cGZDisplayTiming.h"
@@ -202,6 +203,13 @@ public:
 
 				pSC4App->EnableFullGamePauseOnAppFocusLoss(settings.PauseGameOnFocusLoss());
 
+				switch (windowMode)
+				{
+				case SC4WindowMode::BorderlessFullScreen:
+					SC4WindowCreationHooks::Install(windowMode);
+					break;
+				}
+
 				CheckDirectX7ResolutionLimit(videoPrefs.width, videoPrefs.height);
 				FixFullScreen32BitColorDepth();
 				SetGraphicsOptions();
@@ -226,38 +234,11 @@ public:
 
 	bool PreAppInit()
 	{
-		Logger& logger = Logger::GetInstance();
-
-		cIGZFrameWork* const pFramework = RZGetFrameWork();
-
-		if (settings.GetWindowMode() == SC4WindowMode::BorderlessFullScreen)
+		switch (settings.GetWindowMode())
 		{
-			// Convert the dialog to a borderless full screen window.
-
-			cRZAutoRefCount<cIGZFrameWorkW32> pFrameworkW32;
-
-			if (pFramework->QueryInterface(GZIID_cIGZFrameWorkW32, pFrameworkW32.AsPPVoid()))
-			{
-				HWND mainWindowHWND = pFrameworkW32->GetMainHWND();
-
-			    LONG windowStyle = GetWindowLongA(mainWindowHWND, GWL_STYLE);
-
-				windowStyle &= ~WS_OVERLAPPEDWINDOW;
-				// A borderless full screen window uses the WS_POPUP style instead of WS_OVERLAPPED.
-				windowStyle |= WS_POPUP;
-
-				SetWindowLongA(mainWindowHWND, GWL_STYLE, windowStyle);
-
-				// SimCity 4 does not set any of the extended window styles.
-
-				constexpr int x = 0;
-				constexpr int y = 0;
-				int cx = GetSystemMetrics(SM_CXSCREEN);
-				int cy = GetSystemMetrics(SM_CYSCREEN);
-
-				SetWindowPos(mainWindowHWND, HWND_TOP, x, y, cx, cy, SWP_FRAMECHANGED);
-				ShowWindow(mainWindowHWND, SW_MAXIMIZE);
-			}
+		case SC4WindowMode::BorderlessFullScreen:
+			SC4WindowCreationHooks::Remove();
+			break;
 		}
 
 		// This checks to ensure that the game is using the options that
