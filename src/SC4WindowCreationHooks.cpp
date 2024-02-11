@@ -118,7 +118,7 @@ static HWND WINAPI HookedCreateWindowExA(
 			// Change the parameters to the values required for a borderless full screen window.
 			// SimCity 4 does not set any of the extended window styles.
 
-			// A borderless full screen window uses the WS_POPUP style instead of WS_OVERLAPPED.
+			// A borderless full screen window uses the WS_POPUP style instead of WS_OVERLAPPEDWINDOW.
 			// The WS_MAXIMIZE style is also required to make the OS hide the task bar when the
 			// window is displayed, this may be due to the fact that SC4 only calls ShowWindow
 			// if some condition is met, and that condition is not met when starting the game.
