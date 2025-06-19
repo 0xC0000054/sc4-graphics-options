@@ -148,18 +148,30 @@ void Settings::Load(const std::filesystem::path& path)
 	const uint32_t primaryMonitorWidth = static_cast<uint32_t>(GetSystemMetrics(SM_CXSCREEN));
 	const uint32_t primaryMonitorHeight = static_cast<uint32_t>(GetSystemMetrics(SM_CYSCREEN));
 
-	if (windowMode == SC4WindowMode::Windowed)
+	if (windowMode == SC4WindowMode::BorderlessFullScreen)
 	{
+		// Borderless full screen mode is a window that has no caption or border
+		// and matches the resolution of the primary monitor.
+		// The OS will detect this case and hide the task bar.
+		windowWidth = primaryMonitorWidth;
+		windowHeight = primaryMonitorHeight;
+	}
+	else
+	{
+		// For windowed and exclusive full screen modes, we use the user's specified
+		// window size.
+		// If the exclusive full screen window size is less then the primary monitor's
+		// resolution, the OS will change the monitor's display resolution to whatever
+		// the application requests.
+
 		windowWidth = tree.get<uint32_t>("GraphicsOptions.WindowWidth");
 		windowHeight = tree.get<uint32_t>("GraphicsOptions.WindowHeight");
 
 		if (windowWidth < 800 || windowHeight < 600)
 		{
-			logger.WriteLineFormatted(
+			logger.WriteLine(
 				LogLevel::Error,
-				"The window dimensions must be at least 800x600, defaulting to 800x600.",
-				primaryMonitorWidth,
-				primaryMonitorHeight);
+				"The window dimensions must be at least 800x600, defaulting to 800x600.");
 
 			windowWidth = 800;
 			windowHeight = 600;
@@ -177,13 +189,6 @@ void Settings::Load(const std::filesystem::path& path)
 			windowHeight = primaryMonitorHeight;
 			windowMode = SC4WindowMode::BorderlessFullScreen;
 		}
-	}
-	else
-	{
-		// For the full screen and borderless full screen modes we use the dimensions of
-		// the primary monitor. SC4 does not support any monitor other than the primary.
-		windowWidth = primaryMonitorWidth;
-		windowHeight = primaryMonitorHeight;
 	}
 }
 

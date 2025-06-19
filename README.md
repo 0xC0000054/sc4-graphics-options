@@ -54,10 +54,10 @@ Setting this to true is equivalent to the -gp command line argument.
  | SCGL | simmaster07's replacement for SC4's OpenGL renderer. This is an alias for the OpenGL entry above. |
  | Software | The renderer SC4 uses when no supported hardware renderer is available. |
 
- `WindowWidth` the width of SC4's window when running in windowed mode. This is ignored for the full screen and borderless full screen modes.
+ `WindowWidth` the width of SC4's window when running in windowed or full screen mode. This is ignored for the borderless full screen mode.
 The minimum value is 800, values above 2048 with the DirectX driver require the use of a DirectX wrapper.
 
-`WindowHeight` the height of SC4's window when running in windowed mode. This is ignored for the full screen and borderless full screen modes.
+`WindowHeight` the height of SC4's window when running in windowed or full screen mode. This is ignored for the borderless full screen mode.
 The minimum value is 600, values above 2048 with the DirectX driver require the use of a DirectX wrapper.
 
 `ColorDepth` the color depth that SC4 uses, in bits per pixel. The supported values are 16 and 32.
@@ -66,8 +66,8 @@ The minimum value is 600, values above 2048 with the DirectX driver require the 
 
 | Window Mode | Notes |
 |-------------|-------|
-| Windowed | Runs the game in windowed mode, the window size is set by the `WindowWidth` and `WindowHeight` values above. Equivalent to the -w command line parameter.|
-| FullScreen | Runs the game in full screen mode. Equivalent to the -f command line parameter. Screen resolutions larger that 2048x2048 in DirectX mode require the use of a DirectX wrapper. |
+| Windowed | Runs the game in windowed mode, the window size is set by the `WindowWidth` and `WindowHeight` values above. Equivalent to the -w command line parameter. Screen resolutions larger that 2048x2048 in DirectX mode require the use of a DirectX wrapper.|
+| FullScreen | Runs the game in exclusive full screen mode, the window size is set by the `WindowWidth` and `WindowHeight` values above. Equivalent to the -f command line parameter. Screen resolutions larger that 2048x2048 in DirectX mode require the use of a DirectX wrapper. |
 | BorderlessFullScreen | Runs the game a window that covers the entire screen. Screen resolutions larger that 2048x2048 in DirectX mode require the use of a DirectX wrapper. |
 | Borderless | An alias for the `BorderlessFullScreen` option above. |
 
