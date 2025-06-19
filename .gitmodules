@@ -1,3 +1,6 @@
 [submodule "vendor/gzcom-dll"]
 	path = vendor/gzcom-dll
 	url = https://github.com/nsgomez/gzcom-dll.git
+[submodule "vendor/wil"]
+	path = vendor/wil
+	url = https://github.com/microsoft/wil.git

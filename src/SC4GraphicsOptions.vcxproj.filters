@@ -139,7 +139,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include=".editorconfig" />
     <None Include="vcpkg.json" />
     <None Include="IgnoredWords.dic" />
