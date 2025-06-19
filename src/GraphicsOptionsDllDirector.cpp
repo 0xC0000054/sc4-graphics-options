@@ -59,8 +59,6 @@
 #include "wil/resource.h"
 #include "wil/win32_helpers.h"
 
-static constexpr uint32_t kGZGraphicSystem_SystemServiceID = 0xC416025C;
-
 static constexpr uint32_t kGraphicsOptionsDirectorID = 0x50A4C948;
 
 static constexpr std::string_view PluginConfigFileName = "SC4GraphicsOptions.ini";
