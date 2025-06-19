@@ -1,0 +1,3 @@
+[submodule "vendor/gzcom-dll"]
+	path = vendor/gzcom-dll
+	url = https://github.com/nsgomez/gzcom-dll.git

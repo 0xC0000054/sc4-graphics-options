@@ -11,25 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\vendor\EASTL\source\assert.cpp" />
-    <ClCompile Include="..\vendor\EASTL\source\atomic.cpp" />
-    <ClCompile Include="..\vendor\EASTL\source\fixed_pool.cpp" />
-    <ClCompile Include="..\vendor\EASTL\source\hashtable.cpp" />
-    <ClCompile Include="..\vendor\EASTL\source\intrusive_list.cpp" />
-    <ClCompile Include="..\vendor\EASTL\source\numeric_limits.cpp" />
-    <ClCompile Include="..\vendor\EASTL\source\red_black_tree.cpp" />
-    <ClCompile Include="..\vendor\EASTL\source\string.cpp" />
-    <ClCompile Include="..\vendor\EASTL\source\thread_support.cpp" />
-    <ClCompile Include="..\vendor\gzcom-dll\src\cRZBaseString.cpp" />
-    <ClCompile Include="..\vendor\gzcom-dll\src\cRZBaseVariant.cpp" />
-    <ClCompile Include="..\vendor\gzcom-dll\src\cRZCOMDllDirector.cpp" />
-    <ClCompile Include="..\vendor\gzcom-dll\src\cRZMessage2.cpp" />
-    <ClCompile Include="..\vendor\gzcom-dll\src\cRZMessage2Standard.cpp" />
-    <ClCompile Include="..\vendor\gzcom-dll\src\cS3DVector3.cpp" />
-    <ClCompile Include="..\vendor\gzcom-dll\src\cSCBaseProperty.cpp" />
-    <ClCompile Include="..\vendor\gzcom-dll\src\EASTLAllocatorSC4.cpp" />
-    <ClCompile Include="..\vendor\gzcom-dll\src\SC4UI.cpp" />
-    <ClCompile Include="..\vendor\gzcom-dll\src\StringResourceManager.cpp" />
+    <ClCompile Include="..\vendor\gzcom-dll\gzcom-dll\src\cRZBaseString.cpp" />
+    <ClCompile Include="..\vendor\gzcom-dll\gzcom-dll\src\cRZBaseVariant.cpp" />
+    <ClCompile Include="..\vendor\gzcom-dll\gzcom-dll\src\cRZCOMDllDirector.cpp" />
+    <ClCompile Include="..\vendor\gzcom-dll\gzcom-dll\src\cRZMessage2.cpp" />
+    <ClCompile Include="..\vendor\gzcom-dll\gzcom-dll\src\cRZMessage2Standard.cpp" />
+    <ClCompile Include="..\vendor\gzcom-dll\gzcom-dll\src\cS3DVector3.cpp" />
+    <ClCompile Include="..\vendor\gzcom-dll\gzcom-dll\src\cSCBaseProperty.cpp" />
+    <ClCompile Include="..\vendor\gzcom-dll\gzcom-dll\src\SC4UI.cpp" />
+    <ClCompile Include="..\vendor\gzcom-dll\gzcom-dll\src\StringResourceManager.cpp" />
     <ClCompile Include="SC4WindowCreationHooks.cpp" />
     <ClCompile Include="GraphicsOptionsDllDirector.cpp" />
     <ClCompile Include="Logger.cpp" />
@@ -38,17 +28,17 @@
     <ClCompile Include="Settings.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\vendor\gzcom-dll\include\cGZDisplayMetrics.h" />
-    <ClInclude Include="..\vendor\gzcom-dll\include\cGZDisplayTiming.h" />
-    <ClInclude Include="..\vendor\gzcom-dll\include\cGZGPixelFormatDesc.h" />
-    <ClInclude Include="..\vendor\gzcom-dll\include\cIGZApp.h" />
-    <ClInclude Include="..\vendor\gzcom-dll\include\cIGZCOM.h" />
-    <ClInclude Include="..\vendor\gzcom-dll\include\cIGZFrameWork.h" />
-    <ClInclude Include="..\vendor\gzcom-dll\include\cIGZGraphicSystem.h" />
-    <ClInclude Include="..\vendor\gzcom-dll\include\cIGZGraphicSystem2.h" />
-    <ClInclude Include="..\vendor\gzcom-dll\include\cISC4App.h" />
-    <ClInclude Include="..\vendor\gzcom-dll\include\cRZAutoRefCount.h" />
-    <ClInclude Include="..\vendor\gzcom-dll\include\SC4Preferences.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cGZDisplayMetrics.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cGZDisplayTiming.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cGZGPixelFormatDesc.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cIGZApp.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cIGZCOM.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cIGZFrameWork.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cIGZGraphicSystem.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cIGZGraphicSystem2.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cISC4App.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cRZAutoRefCount.h" />
+    <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\SC4Preferences.h" />
     <ClInclude Include="..\vendor\scgl\cGDCombiner.h" />
     <ClInclude Include="..\vendor\scgl\cIGZGDriver.h" />
     <ClInclude Include="..\vendor\scgl\sGDMode.h" />
@@ -115,7 +105,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\vendor\gzcom-dll\include;..\vendor\EASTL\include;..\vendor\EABase\include\Common;..\vendor\scgl;.\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\vendor\gzcom-dll\gzcom-dll\include;..\vendor\scgl;.\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -139,7 +129,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\vendor\gzcom-dll\include;..\vendor\EASTL\include;..\vendor\EABase\include\Common;..\vendor\scgl;.\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\vendor\gzcom-dll\gzcom-dll\include;..\vendor\scgl;.\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>

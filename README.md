@@ -83,10 +83,8 @@ See [LICENSE.txt](LICENSE.txt) for more information.
 
 ## 3rd party code
 
-[gzcom-dll](https://github.com/nsgomez/gzcom-dll) Located in the vendor folder, MIT License.    
+[gzcom-dll](https://github.com/nsgomez/gzcom-dll) - MIT License.    
 [scgl](https://github.com/nsgomez/scgl) Located in the vendor folder, GNU Lesser General Public License version 2.1.    
-[EABase](https://github.com/electronicarts/EABase) Located in the vendor folder, BSD 3-Clause License.    
-[EASTL](https://github.com/electronicarts/EASTL) Located in the vendor folder, BSD 3-Clause License.    
 [SC4Fix](https://github.com/nsgomez/sc4fix) - MIT License.     
 [Windows Implementation Library](https://github.com/microsoft/wil) - MIT License    
 [Detours](https://github.com/microsoft/Detours) - MIT License    

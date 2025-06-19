@@ -59,14 +59,9 @@
 #include "wil/resource.h"
 #include "wil/win32_helpers.h"
 
-#include "EASTLConfigSC4.h"
-#include "EASTL\vector.h"
-
 static constexpr uint32_t kGZGraphicSystem_SystemServiceID = 0xC416025C;
 
 static constexpr uint32_t kGraphicsOptionsDirectorID = 0x50A4C948;
-
-static constexpr uint32_t GZIID_cISC4App = 0x26CE01C0;
 
 static constexpr std::string_view PluginConfigFileName = "SC4GraphicsOptions.ini";
 static constexpr std::string_view PluginLogFileName = "SC4GraphicsOptions.log";
