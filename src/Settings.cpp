@@ -107,6 +107,7 @@ namespace
 Settings::Settings()
 	: enableIntroVideo(true),
 	  pauseGameOnFocusLoss(false),
+	  forceDrawOnScroll(false),
 	  driverDescription(SC4GDriverDescription::DirectX()),
 	  windowWidth(1024),
 	  windowHeight(768),
@@ -132,6 +133,7 @@ void Settings::Load(const std::filesystem::path& path)
 
 	enableIntroVideo = tree.get<bool>("GraphicsOptions.EnableIntroVideo");
 	pauseGameOnFocusLoss = tree.get<bool>("GraphicsOptions.PauseGameOnFocusLoss");
+	forceDrawOnScroll = tree.get<bool>("GraphicsOptions.ForceDrawOnScroll", false);
 	driverDescription = DriverDescriptionFromProperty(tree, "GraphicsOptions.Driver");
 	windowMode = WindowModeFromProperty(tree, "GraphicsOptions.WindowMode");
 	colorDepth = tree.get<uint32_t>("GraphicsOptions.ColorDepth");
@@ -229,4 +231,9 @@ bool Settings::IsUsingGDriver(uint32_t clsid) const
 bool Settings::PauseGameOnFocusLoss() const
 {
 	return pauseGameOnFocusLoss;
+}
+
+bool Settings::ForceDrawOnScroll() const
+{
+	return forceDrawOnScroll;
 }

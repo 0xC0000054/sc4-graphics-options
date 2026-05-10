@@ -48,10 +48,13 @@ public:
 
 	bool PauseGameOnFocusLoss() const;
 
+	bool ForceDrawOnScroll() const;
+
 private:
 
 	bool enableIntroVideo;
 	bool pauseGameOnFocusLoss;
+	bool forceDrawOnScroll;
 	SC4GDriverDescription driverDescription;
 	uint32_t windowWidth;
 	uint32_t windowHeight;

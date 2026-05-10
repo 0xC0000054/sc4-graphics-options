@@ -38,6 +38,7 @@
 #include "cIGZMessageServer2.h"
 #include "cIGZString.h"
 #include "cISC4App.h"
+#include "cISC4RenderProperties.h"
 #include "cRZMessage2COMDirector.h"
 #include "cRZMessage2Standard.h"
 #include "cRZAutoRefCount.h"
@@ -237,6 +238,65 @@ public:
 		// This checks to ensure that the game is using the options that
 		// we requested in PreFrameWorkInit.
 		VerifyGraphicsOptions();
+
+		return true;
+	}
+
+	bool PostAppInit()
+	{
+		if (settings.ForceDrawOnScroll())
+		{
+			bool result = false;
+
+			cIGZApp* const pApp = mpFrameWork->Application();
+
+			if (pApp)
+			{
+				cRZAutoRefCount<cISC4App> pSC4App;
+
+				if (pApp->QueryInterface(GZIID_cISC4App, pSC4App.AsPPVoid()))
+				{
+					cISC4RenderProperties* pRenderProperties = pSC4App->GetRenderProperties();
+
+					if (pRenderProperties)
+					{
+						// The ForceDrawOnScroll setting overrides a few render options for graphics cards with
+						// "slow partial depth buffer copies" that are commented out in the standard version of Graphics Rules.sgr.
+						// The comments in that file indicate that Maxis only observed this issue with a subset of older ATI Radeon
+						// cards, but complaints from users indicate it affects other graphics cards as well.
+
+						const int32_t noPartialBackingStoreKey = pRenderProperties->BoolPropertyIDFromName("NoPartialBackingStoreCopies");
+						const int32_t dirtyRectMergeFramesKey = pRenderProperties->IntPropertyIDFromName("DirtyRectMergeFrames");
+						const int32_t cursorTypeIndex = pRenderProperties->IntPropertyIDFromName("CursorType");
+
+						if (noPartialBackingStoreKey != -1 && dirtyRectMergeFramesKey != -1 && cursorTypeIndex != -1)
+						{
+							constexpr int32_t kCursorType_BlackAndWhite = 0;
+
+							// All of thse values are copied from Graphics Rules.sgr.
+							// Setting the NoPartialBackingStoreCopies option to true activates a special low-impact scrolling mode.
+							pRenderProperties->SetBoolValue(noPartialBackingStoreKey, true);
+							// This should reduce the number of dirty rects the game uses.
+							pRenderProperties->SetIntValue(dirtyRectMergeFramesKey, 8);
+							// Use a black & white cursor due to color cursors not working well on the affected cards.
+							pRenderProperties->SetIntValue(cursorTypeIndex, kCursorType_BlackAndWhite);
+							result = true;
+						}
+					}
+				}
+			}
+
+			Logger& logger = Logger::GetInstance();
+
+			if (result)
+			{
+				logger.WriteLine(LogLevel::Info, "Set the ForceDrawOnScroll rendering options.");
+			}
+			else
+			{
+				logger.WriteLine(LogLevel::Info, "Failed to set the ForceDrawOnScroll rendering options.");
+			}
+		}
 
 		return true;
 	}
