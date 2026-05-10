@@ -45,6 +45,10 @@ Setting this to false is equivalent to the -Intro:off command line argument.
 `PauseGameOnFocusLoss` controls whether the game will be paused when it looses focus, defaults to false.
 Setting this to true is equivalent to the -gp command line argument.
 
+`ForceDrawOnScroll` enables a series of compatibility options for graphics cards that have issues
+like screen tearing with the game's default scrolling behavior, defaults to false.
+Equivalent to SC4Launcher's "force draw on scroll" option.
+
  `Driver` the driver that SC4 uses for rendering, the supported values are listed in the following table:
 
  | Driver | Notes |
