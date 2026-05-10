@@ -180,14 +180,13 @@ void Settings::Load(const std::filesystem::path& path)
 		{
 			logger.WriteLineFormatted(
 				LogLevel::Error,
-				"The window dimensions are larger than the monitor size, switching"
-				"to borderless full screen mode with a resolution of %u\u0078%u.",
+				"The window dimensions are larger than the monitor size, using the"
+				"the primary display size %u\u0078%u.",
 				primaryMonitorWidth,
 				primaryMonitorHeight);
 
 			windowWidth = primaryMonitorWidth;
 			windowHeight = primaryMonitorHeight;
-			windowMode = SC4WindowMode::BorderlessFullScreen;
 		}
 	}
 }
