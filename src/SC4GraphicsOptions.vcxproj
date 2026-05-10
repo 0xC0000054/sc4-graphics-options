@@ -39,9 +39,6 @@
     <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cISC4App.h" />
     <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cRZAutoRefCount.h" />
     <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\SC4Preferences.h" />
-    <ClInclude Include="..\vendor\scgl\cGDCombiner.h" />
-    <ClInclude Include="..\vendor\scgl\cIGZGDriver.h" />
-    <ClInclude Include="..\vendor\scgl\sGDMode.h" />
     <ClInclude Include="SC4WindowCreationHooks.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="SC4GDriverCLSIDDefs.h" />
@@ -104,7 +101,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\vendor\gzcom-dll\gzcom-dll\include;..\vendor\scgl;..\vendor\wil\include;.\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\vendor\gzcom-dll\gzcom-dll\include;..\vendor\wil\include;.\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -128,7 +125,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\vendor\gzcom-dll\gzcom-dll\include;..\vendor\scgl;..\vendor\wil\include;.\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\vendor\gzcom-dll\gzcom-dll\include;..\vendor\wil\include;.\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>

@@ -19,9 +19,6 @@
     <Filter Include="Header Files\GZCOM">
       <UniqueIdentifier>{55969e5e-2491-4049-8687-619fc7c065a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\scgl">
-      <UniqueIdentifier>{16be9cdc-1be2-491b-b195-43cfaa7c9cbd}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp">
@@ -76,15 +73,6 @@
     </ClInclude>
     <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\scgl\cGDCombiner.h">
-      <Filter>Header Files\scgl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\scgl\cIGZGDriver.h">
-      <Filter>Header Files\scgl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\scgl\sGDMode.h">
-      <Filter>Header Files\scgl</Filter>
     </ClInclude>
     <ClInclude Include="..\vendor\gzcom-dll\gzcom-dll\include\cIGZApp.h">
       <Filter>Header Files\GZCOM</Filter>
@@ -147,8 +135,5 @@
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Natvis Include="$(MSBuildThisFileDirectory)..\..\natvis\wil.natvis" />
   </ItemGroup>
 </Project>
