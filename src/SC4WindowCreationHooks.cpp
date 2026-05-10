@@ -2,7 +2,7 @@
  *  SC4GraphicsOptions - a DLL plugin for SimCity 4 that sets
  *  the game's rendering mode and resolution options.
  *
- *  Copyright (C) 2024 Nicholas Hayes
+ *  Copyright (C) 2024, 2025, 2026 Nicholas Hayes
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
