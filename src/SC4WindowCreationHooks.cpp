@@ -27,24 +27,10 @@
 
 namespace
 {
-	bool StringViewEquals(const std::string_view& lhs, const std::string_view& rhs)
+	bool StringViewStartsWith(const std::string_view& lhs, const std::string_view& rhs)
 	{
-		return lhs.size() == rhs.size()
-			&& boost::equals(lhs, rhs);
-	}
-
-	bool IsSC4AppWindowClassName(const std::string_view& className)
-	{
-		return StringViewEquals(className, "GDriverClass--DirectX")
-			|| StringViewEquals(className, "GDriverClass--OpenGL")
-			|| StringViewEquals(className, "GDriverClass--Software");
-	}
-
-	bool IsSC4AppWindowName(const std::string_view& windowName)
-	{
-		return StringViewEquals(windowName, "GDriverWindow--DirectX")
-			|| StringViewEquals(windowName, "GDriverWindow--OpenGL")
-			|| StringViewEquals(windowName, "GDriverWindow--Software");
+		return lhs.size() >= rhs.size()
+			&& boost::starts_with(lhs, rhs);
 	}
 
 	bool IsSC4AppWindow(
@@ -57,8 +43,10 @@ namespace
 		{
 			// We check the window name first, as some windows may
 			// not use a valid string for the class name.
-			result = IsSC4AppWindowName(lpWindowName)
-				  && IsSC4AppWindowClassName(lpClassName);
+			// All known SC4 graphics drivers use the following prefixes
+			// for their class and window names.
+			result = StringViewStartsWith(lpWindowName, "GDriverWindow")
+				  && StringViewStartsWith(lpClassName, "GDriverClass");
 		}
 
 		return result;
